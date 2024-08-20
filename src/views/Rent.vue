@@ -1,37 +1,55 @@
 <template>
-  <div class="home">
-    <HomeSlider />
-    <div v-for="(cardData, index) in cards" :key="index">
+  <div class="innerpage">
+    <Breadcrumbs> Аренда техники </Breadcrumbs>
+    <Banner :imgsrc="BannerImage"> Аренда техники </Banner>
+    <div
+      v-for="(cardData, index) in cards"
+      :key="index"
+      :class="index % 2 !== 0 ? 'gray block' : 'block'"
+    >
       <Card
-        :class="index % 2 !== 0 ? 'reverse gray block' : 'block'"
+        :class="index % 2 !== 0 ? 'reverse' : ''"
         :name="cardData.name"
         :text="cardData.text"
         :mass="cardData.mass"
         :deep="cardData.deep"
         :capacity="cardData.capacity"
         :cardImage="cardData.cardImage"
+        :rentLink="cardData.rentLink"
       />
+      <Additional :yellowType="index % 2 !== 0 ? false : true" />
+      <Seo title="SEO" :text="text" />
+      <Gallery :whiteArrow="index % 2 !== 0 ? false : true" />
     </div>
-    <Metall class="block gray" />
-    <Repairblock class="block"></Repairblock>
   </div>
 </template>
-
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HomeSlider from "@/components/HomeSlider.vue";
+import Breadcrumbs from "@/components/Breadcrumbs.vue";
+import Banner from "@/components/Banner.vue";
+const BannerImage = require("@/assets/img/main/1.png") as string;
+import Seo from "@/components/Seo.vue";
 import Card from "@/components/Card.vue";
-import Metall from "@/components/Metall.vue";
-import Repairblock from "@/components/RepairBlock.vue";
+import Additional from "@/components/Additional.vue";
+import Gallery from "@/components/Gallery.vue";
 @Component({
   components: {
-    HomeSlider,
+    Breadcrumbs,
+    Banner,
     Card,
-    Metall,
-    Repairblock,
+    Additional,
+    Gallery,
+    Seo,
   },
 })
-export default class HomeView extends Vue {
+export default class Rent extends Vue {
+  BannerImage = BannerImage;
+  text = `Мы обладаем необходимыми навыками и опытом для выполнения ремонта самого разного оборудования, включая мотокультиваторы, мотопомпы, насосные станции, бензиновые и дизельные генераторы, бензотримеры, мотокосы, бензопилы, бензорезы и многое другое.
+  <br><br>
+  Мы понимаем, как важно для вас сохранить в рабочем состоянии технику, которая облегчает уход за домом и садом. Наши специалисты гарантируют качественный ремонт, при котором устраняются не только очевидные неисправности, но и предотвращаются возможные проблемы в будущем.
+  <br><br>
+  Наш сервис обеспечивает полный цикл ремонта - от диагностики до исправления любых неисправностей и проведения планового обслуживания. Мы работаем со всеми популярными брендами и моделями оборудования для дома и сада, что позволяет нам быстро и эффективно решать любые задачи.
+  `;
   cards = [
     {
       name: "Kubota U20",
@@ -42,6 +60,7 @@ export default class HomeView extends Vue {
       deep: "2 500",
       capacity: "0.1",
       cardImage: require("@/assets/img/card/1.png"),
+      rentLink: false,
     },
     {
       name: "Kubota U35",
@@ -54,6 +73,7 @@ export default class HomeView extends Vue {
       deep: "3 140",
       capacity: "0.1",
       cardImage: require("@/assets/img/card/2.png"),
+      rentLink: false,
     },
     {
       name: "Грунторез",
@@ -66,6 +86,7 @@ export default class HomeView extends Vue {
       deep: "1 500",
       capacity: "",
       cardImage: require("@/assets/img/card/3.png"),
+      rentLink: false,
     },
   ];
   mounted() {
