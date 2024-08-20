@@ -22,9 +22,9 @@
           ><img src="@/assets/img/Logo.svg" alt=""
         /></router-link>
         <nav class="menu" :class="{ menu: true, active: burger }">
-          <div class="menu__logo">
-            <img src="@/assets/img/Logo.svg" alt="" />
-          </div>
+          <router-link to="/" class="menu__logo">
+            <img src="@/assets/img/Logo.svg" @click="closeBurger" alt="" />
+          </router-link>
           <ul class="menu__list">
             <li class="menu__item" @click="closeBurger">
               <router-link to="/rent" class="menu__link"
