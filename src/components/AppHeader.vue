@@ -26,17 +26,17 @@
             <img src="@/assets/img/Logo.svg" alt="" />
           </div>
           <ul class="menu__list">
-            <li class="menu__item">
+            <li class="menu__item" @click="closeBurger">
               <router-link to="/rent" class="menu__link"
                 >Аренда техники</router-link
               >
             </li>
-            <li class="menu__item">
+            <li class="menu__item" @click="closeBurger">
               <router-link to="/metalworking" class="menu__link"
                 >Металлообработка</router-link
               >
             </li>
-            <li class="menu__item">
+            <li class="menu__item" @click="closeBurger">
               <router-link to="/repair" class="menu__link"
                 >Ремонт и ТО</router-link
               >
@@ -132,6 +132,10 @@ export default class AppHeader extends Vue {
     } else {
       document.body.classList.remove("lock");
     }
+  }
+  closeBurger() {
+    this.burger = false;
+    document.body.classList.remove("lock");
   }
 }
 </script>
